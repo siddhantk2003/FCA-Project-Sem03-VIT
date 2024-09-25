@@ -7,7 +7,7 @@ from rich.progress import track
 
 
 def download_file(url, filename):
-    """Download a file from the specified URL and save it to the given filename."""
+    #Download a file from the specified URL and save it to the given filename.
     response = get(
         url,
         headers={
@@ -19,13 +19,13 @@ def download_file(url, filename):
 
 
 def create_output_directory(directory):
-    """Create an output directory if it doesn't exist."""
+    #Create an output directory if it doesn't exist.
     if not os.path.exists(directory):
         os.mkdir(directory)
 
 
 def process_company(company):
-    """Process the submissions for a given company."""
+    #Process the submissions for a given company.
     try:
         submissions = getSubmissionsByCik(company[6])
         selected_submissions = [sub for sub in submissions if sub.form == "10-K"]
@@ -55,12 +55,12 @@ def process_company(company):
 
 
 def main():
-    """Main function to read companies from CSV and initiate downloads."""
+    #Main function to read companies from CSV and initiate downloads.
     create_output_directory("Output")
 
     with open("sp500.csv", encoding="utf-8") as file:
         csv_reader = reader(file)
-        companies = list(csv_reader)[1:]  # Skip header
+        companies = list(csv_reader)[1:]
 
     for company in track(companies, description="Processing companies..."):
         company_dir = f"Output/{company[1]}"
